@@ -1,0 +1,30 @@
+/* YouTube 스타일 앱 전용 CSS */
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0f0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #606060;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #808080;
+}
+
+/* 커스텀 유틸리티 */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+/* 검색 아이콘 호버 효과 */
+.search-button:hover svg {
+  transform: scale(1.1);
+}
