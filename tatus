@@ -1,0 +1,2 @@
+[33m2c8929d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m fix: npm ci를 npm install로 변경하여 package-lock.json 의존성 문제 해결
+[33m3ac76eb[m feat: 초기 프로젝트 설정 및 GitHub Pages 배포 준비
