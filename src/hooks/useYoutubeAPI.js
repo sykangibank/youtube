@@ -11,16 +11,22 @@ const useYoutubeAPI = (searchType='search', query='') => {
   const [error, setError] = useState(null);
 
   const getTestData = (type) => {
+    console.log(`Getting test data for type: ${type}`);
     switch(type){
       case 'search':
+        console.log(`Search test data length: ${searchData.items ? searchData.items.length : 0}`);
         return searchData.items || [];
       case 'popular':
+        console.log(`Popular test data length: ${popularData.items ? popularData.items.length : 0}`);
         return popularData.items || [];
       case 'related':
+        console.log(`Related test data length: ${relatedData.items ? relatedData.items.length : 0}`);
         return relatedData.items || [];
       case 'channel':
+        console.log(`Channel test data length: ${channelData.items ? channelData.items.length : 0}`);
         return channelData.items || [];
       default:
+        console.log(`Unknown type: ${type}, returning empty array`);
         return [];
     }
   }
@@ -32,8 +38,11 @@ const useYoutubeAPI = (searchType='search', query='') => {
         setError(null);
 
         if(!API_KEY){
-          console.log(`Using ${searchType} test data`);
-          setVideos(getTestData(searchType));
+          console.log(`No API key found, using ${searchType} test data`);
+          const testData = getTestData(searchType);
+          console.log(`Test data loaded:`, testData);
+          console.log(`Setting videos with ${testData.length} items`);
+          setVideos(testData);
           setLoading(false);
           return;
         }
@@ -64,16 +73,22 @@ const useYoutubeAPI = (searchType='search', query='') => {
         const response = await fetch(apiUrl);
 
         if(!response.ok){
+          console.log(`API Error ${response.status}: ${response.statusText}`);
           throw new Error(`API Error: ${response.status}`);
         }
 
         const data = await response.json();
+        console.log(`Successfully fetched ${searchType} data:`, data);
         setVideos(data.items || []);
 
       } catch(err){
         console.log('API 호출 오류:', err);
-        console.log(`Fallback to ${searchType} test data dut to error`);
-        setVideos(getTestData(searchType));
+        console.log(`Fallback to ${searchType} test data due to error`);
+        const fallbackData = getTestData(searchType);
+        console.log(`Fallback data received:`, fallbackData);
+        console.log(`Setting videos with ${fallbackData.length} items`);
+        setVideos(fallbackData);
+        setError(null); // 테스트 데이터를 사용하므로 에러 상태 해제
       } finally {
         setLoading(false);
       }

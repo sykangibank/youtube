@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main/>}></Route>
             <Route path="/Videos" element={<Main/>}></Route>
-            <Route path={`/Videos/:keyword`} element={<SearchedVideos/>}></Route>
+            <Route path={`/Videos/:query`} element={<SearchedVideos/>}></Route>
             <Route path={`/Videos/watch/:id`} element={<VideoDetail/>}></Route>
           </Routes>
         </main>

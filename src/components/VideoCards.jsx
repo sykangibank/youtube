@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 
-const VideoCard = ({items}) => {
+const VideoCards = ({videos}) => {
   const getVideoId = (item) => {
     if(item.id && typeof item.id === 'object' && item.id.videoId){
       return item.id.videoId;
@@ -25,9 +25,17 @@ const VideoCard = ({items}) => {
     return `${Math.floor(diffDays / 365)}년 전`;
   };
 
+  if (!videos || videos.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-64 text-gray-400">
+        <p>표시할 비디오가 없습니다.</p>
+      </div>
+    );
+  }
+
   return(
-    <>
-      {items.map((item,index) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {videos.map((item,index) => (
         <Link 
           key={index}
           to={`/Videos/watch/${getVideoId(item)}`} 
@@ -38,7 +46,7 @@ const VideoCard = ({items}) => {
             {/* 썸네일 */}
             <div className="relative aspect-video bg-gray-800">
               <img 
-                src={item.snippet.thumbnails.high.url} 
+                src={item.snippet.thumbnails.medium.url} 
                 alt={item.snippet.title}
                 className="w-full h-full object-cover rounded-lg"
               />
@@ -64,8 +72,8 @@ const VideoCard = ({items}) => {
           </div>
         </Link>
       ))}
-    </>
+    </div>
   )
 }
 
-export default VideoCard;
+export default VideoCards;

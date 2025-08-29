@@ -63,3 +63,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 500;
 }
+
+/* Custom utility classes for specific needs */
+.line-clamp-2 { 
+  display: -webkit-box; 
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical; 
+  overflow: hidden; 
+}
